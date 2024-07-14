@@ -8,7 +8,9 @@
 //
 //
 
+using Habit_Logger_Application;
 
+UserHabit userHabit = new();
 GetUserInput();
 
 
@@ -25,22 +27,70 @@ void GetUserInput()
         "------------------------------------------------\n\n"
         );
     userSelectionString = Console.ReadLine();
+    ValidateUserInput(userSelectionString);
 }
 
 
 
-if (!int.TryParse(userSelectionString, out int userSelectionInt))
+void ValidateUserInput(string userSelectionString)
 {
-    Console.Clear();
-    Console.WriteLine("\n- Please enter a number between 0 and 4 -\n\n\n");
-    GetUserInput();
+    if (!int.TryParse(userSelectionString, out int userSelectionInt))
+    {
+        Console.Clear();
+        Console.WriteLine("\n- Please enter a number between 0 and 4 -\n\n\n");
+        GetUserInput();
+    }
+    else if (userSelectionInt > 0 || userSelectionInt < 5)
+    {
+        switch (userSelectionInt)
+        {
+            case 0: Console.WriteLine(); break;
+            case 1: InsertRecord(); break;
+            case 2: Console.WriteLine(); break;
+            case 3: Console.WriteLine(); break;
+            case 4: Console.WriteLine(); break;
+        }
+    }
+    else { GetUserInput(); }
 }
 
-
-
-
-
-if (userSelectionInt > 0 || userSelectionInt < 5)
+//when user selects 1
+void ViewRecord()
 {
+    //if no record?
+}
 
+//when user selects 2
+void InsertRecord()
+{
+    string habitNameInput;
+    do
+    {
+        Console.WriteLine("Please enter a Name for your habit");
+        habitNameInput = Console.ReadLine();
+
+    } while (string.IsNullOrWhiteSpace(habitNameInput));
+
+    string habitDescriptionInput;
+    do
+    {
+        Console.WriteLine("Please enter a Description for your habit");
+        habitDescriptionInput = Console.ReadLine();
+
+    } while (string.IsNullOrWhiteSpace(habitDescriptionInput));
+
+    //save record to db
+
+}
+
+//when user selects 3
+void DeleteRecord()
+{
+    //if no record?
+}
+
+//when user selects 4
+void UpdateRecord()
+{
+    //if no record?
 }

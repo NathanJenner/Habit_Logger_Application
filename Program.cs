@@ -45,8 +45,8 @@ void ValidateUserInput(string userSelectionString)
         switch (userSelectionInt)
         {
             case 0: Console.WriteLine(); break;
-            case 1: InsertRecord(); break;
-            case 2: Console.WriteLine(); break;
+            case 1: Console.WriteLine(); ; break;
+            case 2: InsertRecord(); break;
             case 3: Console.WriteLine(); break;
             case 4: Console.WriteLine(); break;
         }

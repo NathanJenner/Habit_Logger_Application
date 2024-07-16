@@ -11,6 +11,7 @@ internal class DatabaseServices
         //HabitCount int,
         //HabitName string,
         //HabitDescription string,
+        //);
     }
 
 
@@ -18,7 +19,8 @@ internal class DatabaseServices
 
     public void PostToDatabase()
     {
-
+        //INSERT INTO (HabitCount, HabitName, HabitDescription)
+        //VALUES (2, Running, Count of how many times i've run)
     }
 
     public void GetFromDatabase()
@@ -32,7 +34,9 @@ internal class DatabaseServices
         using var reader = command.ExecuteReader();
         while (reader.Read())
         {
-            var url = reader.GetString(0);
+            var number = reader.GetInt32(0);
+            var name = reader.GetString(1);
+            var description = reader.GetString(2);
         }
     }
 

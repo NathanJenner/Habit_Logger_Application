@@ -1,6 +1,4 @@
-﻿
-
-//create database if doesn't already exist
+﻿//create database if doesn't already exist
 
 
 //Prompt user for input - options: insert, delete, update and view their logged habit.
@@ -11,7 +9,9 @@
 using Habit_Logger_Application;
 
 UserHabit userHabit = new();
+DatabaseServices databaseServices = new();
 GetUserInput();
+databaseServices.CreateDatabaseAndTable();
 
 
 string userSelectionString;
@@ -44,7 +44,7 @@ void ValidateUserInput(string userSelectionString)
     {
         switch (userSelectionInt)
         {
-            case 0: Console.WriteLine(); break;
+            case 0: Console.Clear(); break;
             case 1: Console.WriteLine(); ; break;
             case 2: InsertRecord(); break;
             case 3: Console.WriteLine(); break;
@@ -71,15 +71,11 @@ void InsertRecord()
 
     } while (string.IsNullOrWhiteSpace(habitNameInput));
 
-    string habitDescriptionInput;
-    do
-    {
-        Console.WriteLine("Please enter a Description for your habit");
-        habitDescriptionInput = Console.ReadLine();
+    userHabit.HabitName = habitNameInput;
+    userHabit.Id = 006;
+    userHabit.HabitCounter = 0;
 
-    } while (string.IsNullOrWhiteSpace(habitDescriptionInput));
-
-    //save record to db
+    databaseServices.PostToDatabase(userHabit);
 
 }
 

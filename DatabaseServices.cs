@@ -4,32 +4,59 @@ namespace Habit_Logger_Application;
 
 internal class DatabaseServices
 {
-
     public void CreateDatabaseAndTable()
     {
-        //CREATE TABLE habits (
-        //HabitCount int,
-        //HabitName string,
-        //HabitDescription string,
-        //);
+        var connectionString = "Data Source=habits.db;";
+
+        //need to clear any delayed queries. Had multiple entries when creating.
+
+
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+
+        using var command = connection.CreateCommand();
+        command.CommandText =
+        @"
+                        CREATE TABLE IF NOT EXISTS habits (
+                            id INTEGER PRIMARY KEY, 
+                            habitcount INTEGER,     
+                            habitname TEXT
+                            );
+
+                        INSERT INTO habits
+                        VALUES (005, 2, 'Running')
+            ";
+        command.ExecuteNonQuery();
     }
 
 
 
 
-    public void PostToDatabase()
+    public void PostToDatabase(UserHabit habit)
     {
-        //INSERT INTO (HabitCount, HabitName, HabitDescription)
-        //VALUES (2, Running, Count of how many times i've run)
+        using var connection = new SqliteConnection("Data Source=habits.db");
+        connection.Open();
+
+        using var command = connection.CreateCommand();
+        command.CommandText =
+            @"
+                INSERT INTO habits (id, habitcount, habitname)
+                VALUES ($id, $habitcount, $habitname)
+            ";
+        command.Parameters.AddWithValue("$id", habit.Id);
+        command.Parameters.AddWithValue("$habitcount", habit.HabitCounter);
+        command.Parameters.AddWithValue("$habitname", habit.HabitName);
+
+        command.ExecuteNonQuery();
     }
 
     public void GetFromDatabase()
     {
-        using var connection = new SqliteConnection("Data Source=Blogs.db");
+        using var connection = new SqliteConnection("Data Source=habits.db");
         connection.Open();
 
         using var command = connection.CreateCommand();
-        command.CommandText = "SELECT Url FROM Blogs";
+        command.CommandText = "SELECT * FROM habits";
 
         using var reader = command.ExecuteReader();
         while (reader.Read())

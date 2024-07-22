@@ -72,7 +72,6 @@ void InsertRecord()
     } while (string.IsNullOrWhiteSpace(habitNameInput));
 
     userHabit.HabitName = habitNameInput;
-    userHabit.Id = 006;
     userHabit.HabitCounter = 0;
 
     databaseServices.PostToDatabase(userHabit);

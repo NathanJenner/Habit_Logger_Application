@@ -50,7 +50,7 @@ internal class DatabaseServices
         command.ExecuteNonQuery();
     }
 
-    public void GetFromDatabase()
+    public void GetFromDatabase(UserHabit habit)
     {
         using var connection = new SqliteConnection("Data Source=habits.db");
         connection.Open();
@@ -67,12 +67,12 @@ internal class DatabaseServices
         }
     }
 
-    public void UpdateToDatabase()
+    public void UpdateToDatabase(UserHabit habit)
     {
 
     }
 
-    public void DeleteFromDatabase()
+    public void DeleteFromDatabase(int id)
     {
 
     }

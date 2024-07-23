@@ -45,7 +45,7 @@ void ValidateUserInput(string userSelectionString)
         switch (userSelectionInt)
         {
             case 0: Console.Clear(); break;
-            case 1: Console.WriteLine(); ; break;
+            case 1: ViewRecord(); ; break;
             case 2: InsertRecord(); break;
             case 3: Console.WriteLine(); break;
             case 4: Console.WriteLine(); break;
@@ -57,6 +57,19 @@ void ValidateUserInput(string userSelectionString)
 //when user selects 1
 void ViewRecord()
 {
+    Console.WriteLine("\n\nPlease enter the ID of your habit");
+    string habitIdToReview = Console.ReadLine();
+
+
+    if (int.TryParse(habitIdToReview, out int result))
+    {
+        databaseServices.GetFromDatabase(result);
+    }
+    else
+    {
+        ViewRecord();
+    }
+
     //if no record?
 }
 
@@ -75,8 +88,9 @@ void InsertRecord()
     userHabit.HabitCounter = 0;
 
     databaseServices.PostToDatabase(userHabit);
-
 }
+
+
 
 //when user selects 3
 void DeleteRecord()

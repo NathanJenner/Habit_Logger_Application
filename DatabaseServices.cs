@@ -46,22 +46,39 @@ internal class DatabaseServices
         command.ExecuteNonQuery();
     }
 
-    public void GetFromDatabase(UserHabit habit)
+
+
+    public void GetFromDatabase(int habitId) // cut parameters: UserHabit habit
     {
-        using var connection = new SqliteConnection("Data Source=habits.db");
-        connection.Open();
-
-        using var command = connection.CreateCommand();
-        command.CommandText = "SELECT * FROM habits";
-
-        using var reader = command.ExecuteReader();
-        while (reader.Read())
+        using (var connection = new SqliteConnection("Data Source=habits.db"))
         {
-            var number = reader.GetInt32(0);
-            var name = reader.GetString(1);
-            var description = reader.GetString(2);
+            connection.Open();
+
+            using var command = connection.CreateCommand();
+            command.CommandText =
+                @"
+                SELECT habitname, habitcount 
+                FROM habits
+                WHERE id = $id
+                ";
+            command.Parameters.AddWithValue("$id", habitId);
+
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var habitName = reader.GetString(0);
+                    var habitCount = reader.GetString(1);
+                    Console.WriteLine($"For {habitName} your current Count is - {habitCount}");
+                }
+
+                //look to simplify this to just one entry. User wouldn't know the id.
+            }
         }
     }
+
+
+
 
     public void UpdateToDatabase(UserHabit habit)
     {

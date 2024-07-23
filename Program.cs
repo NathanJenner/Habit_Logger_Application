@@ -96,6 +96,21 @@ void InsertRecord()
 void DeleteRecord()
 {
     //if no record?
+    Console.WriteLine("Are you sure you want to delete your habit? Y/N");
+    string deleteConfirmation = Console.ReadLine();
+    if (deleteConfirmation.ToUpper() == "Y")
+    {
+        databaseServices.DeleteFromDatabase();
+    }
+    else
+    {
+        GetUserInput();
+    }
+
+
+
+
+
 }
 
 //when user selects 4

@@ -78,14 +78,24 @@ internal class DatabaseServices
     }
 
 
+    public void DeleteFromDatabase()
+    {
+        using (var connection = new SqliteConnection("Data Source=habits.db"))
+        {
+            connection.Open();
+            using var command = connection.CreateCommand();
+            command.CommandText =
+                @"DELETE FROM habits,
+                WHERE id = 1";
+
+            command.ExecuteNonQuery();
+        }
+    }
+
+
 
 
     public void UpdateToDatabase(UserHabit habit)
-    {
-
-    }
-
-    public void DeleteFromDatabase(int id)
     {
 
     }

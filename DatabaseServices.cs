@@ -21,11 +21,8 @@ internal class DatabaseServices
                             id INTEGER PRIMARY KEY, 
                             habitcount INTEGER,     
                             habitname TEXT
-                            );
-
-                        INSERT INTO habits
-                        VALUES (005, 2, 'Running')
-            ";
+                            );  
+        ";
         command.ExecuteNonQuery();
     }
 
@@ -40,10 +37,9 @@ internal class DatabaseServices
         using var command = connection.CreateCommand();
         command.CommandText =
             @"
-                INSERT INTO habits (id, habitcount, habitname)
-                VALUES ($id, $habitcount, $habitname)
+                INSERT INTO habits (habitcount, habitname)
+                VALUES ($habitcount, $habitname)
             ";
-        command.Parameters.AddWithValue("$id", habit.Id);
         command.Parameters.AddWithValue("$habitcount", habit.HabitCounter);
         command.Parameters.AddWithValue("$habitname", habit.HabitName);
 

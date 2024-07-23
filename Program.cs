@@ -10,8 +10,8 @@ using Habit_Logger_Application;
 
 UserHabit userHabit = new();
 DatabaseServices databaseServices = new();
-GetUserInput();
 databaseServices.CreateDatabaseAndTable();
+GetUserInput();
 
 
 string userSelectionString;

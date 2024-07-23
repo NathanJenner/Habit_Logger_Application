@@ -2,8 +2,8 @@
 
 public class UserHabit
 {
-    private static int IdCounter { get; set; }
-    private int Id { get; set; }
+    public static int IdCounter { get; set; }
+    public int Id { get; set; }
     public int HabitCounter { get; set; }
     public string HabitName { get; set; }
 
@@ -14,8 +14,6 @@ public class UserHabit
         this.Id = IdCounter;
 
     }
-
-
 
 
 }

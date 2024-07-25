@@ -66,7 +66,6 @@ internal class DatabaseServices
                     var habitCount = reader.GetString(1);
                     Console.WriteLine($"\n\nFor {habitName} your current Count is - {habitCount}");
                 }
-
             }
         }
     }
@@ -79,7 +78,7 @@ internal class DatabaseServices
             connection.Open();
             using var command = connection.CreateCommand();
             command.CommandText =
-                @"DELETE FROM habits,
+                @"DELETE FROM habits
                 WHERE id = 1";
 
             command.ExecuteNonQuery();

@@ -82,7 +82,7 @@ void InsertRecord()
     userHabit.HabitCounter = 0;
 
     databaseServices.PostToDatabase(userHabit);
-    Console.WriteLine("\n\nYour habit has been recorded");
+    Console.WriteLine("\n\nYour habit has been recorded\n\n\n");
     GetUserInput();
 }
 
@@ -96,12 +96,10 @@ void DeleteRecord()
     if (deleteConfirmation.ToUpper() == "Y")
     {
         databaseServices.DeleteFromDatabase();
-        Console.WriteLine("\n\n ---- Your habit has been deleted ---- ");
+        Console.WriteLine("\n\n ---- Your habit has been deleted ---- \n\n\n");
     }
-    else
-    {
-        GetUserInput();
-    }
+
+    GetUserInput();
 }
 
 //when user selects 4

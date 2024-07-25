@@ -43,7 +43,10 @@ void ValidateUserInput(string userSelectionString)
             case 4: UpdateRecord(); break;
         }
     }
-    else { GetUserInput(); }
+    else
+    {
+        GetUserInput();
+    }
 }
 
 
@@ -51,19 +54,6 @@ void ValidateUserInput(string userSelectionString)
 void ViewRecord()
 {
     databaseServices.GetFromDatabase();
-
-
-    //Console.WriteLine("\n\nPlease enter the ID of your habit");
-    //string habitIdToReview = Console.ReadLine();
-
-    //if (int.TryParse(habitIdToReview, out int result))
-    //{
-    //    databaseServices.GetFromDatabase(result);
-    //}
-    //else
-    //{
-    //    ViewRecord();
-    //}
 }
 
 
@@ -83,6 +73,7 @@ void InsertRecord()
 
     databaseServices.PostToDatabase(userHabit);
     Console.WriteLine("\n\nYour habit has been recorded\n\n\n");
+
     GetUserInput();
 }
 
@@ -90,9 +81,9 @@ void InsertRecord()
 //when user selects 3
 void DeleteRecord()
 {
-    //if no record?
     Console.WriteLine("Are you sure you want to delete your habit? Y/N");
     string deleteConfirmation = Console.ReadLine();
+
     if (deleteConfirmation.ToUpper() == "Y")
     {
         databaseServices.DeleteFromDatabase();
@@ -101,6 +92,7 @@ void DeleteRecord()
 
     GetUserInput();
 }
+
 
 //when user selects 4
 void UpdateRecord()

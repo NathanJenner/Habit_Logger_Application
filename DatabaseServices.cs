@@ -8,20 +8,17 @@ internal class DatabaseServices
     {
         var connectionString = "Data Source=habits.db;";
 
-        //need to clear any delayed queries. Had multiple entries when creating.
-
-
         using var connection = new SqliteConnection(connectionString);
         connection.Open();
 
         using var command = connection.CreateCommand();
         command.CommandText =
         @"
-                        CREATE TABLE IF NOT EXISTS habits (
-                            id INTEGER PRIMARY KEY, 
-                            habitcount INTEGER,     
-                            habitname TEXT
-                            );  
+            CREATE TABLE IF NOT EXISTS habits (
+                id INTEGER PRIMARY KEY, 
+                habitcount INTEGER,     
+                habitname TEXT
+            );  
         ";
         command.ExecuteNonQuery();
     }
@@ -50,12 +47,11 @@ internal class DatabaseServices
         using (var connection = new SqliteConnection("Data Source=habits.db"))
         {
             connection.Open();
-
             using var command = connection.CreateCommand();
             command.CommandText =
                 @"
-                SELECT * 
-                FROM habits
+                    SELECT * 
+                    FROM habits
                 ";
 
             using (var reader = command.ExecuteReader())
@@ -64,6 +60,7 @@ internal class DatabaseServices
                 {
                     var habitName = reader.GetString(2);
                     var habitCount = reader.GetString(1);
+
                     Console.WriteLine($"\n\nFor {habitName} your current Count is - {habitCount}");
                 }
             }
@@ -78,9 +75,10 @@ internal class DatabaseServices
             connection.Open();
             using var command = connection.CreateCommand();
             command.CommandText =
-                @"DELETE FROM habits
-                WHERE id = 1";
-
+                @"
+                    DELETE FROM habits
+                    WHERE id = 1
+                ";
             command.ExecuteNonQuery();
         }
     }
@@ -88,17 +86,18 @@ internal class DatabaseServices
 
     public void UpdateToDatabase(int habitCount)
     {
-        using var connection = new SqliteConnection("Data Source=habits.db");
-        connection.Open();
+        using (var connection = new SqliteConnection("Data Source=habits.db"))
+        {
+            connection.Open();
+            using var command = connection.CreateCommand();
+            command.CommandText =
+                @"
+                    INSERT INTO habits (habitcount)
+                    VALUES ($habitcount)
+                ";
+            command.Parameters.AddWithValue("$habitcount", habitCount);
 
-        using var command = connection.CreateCommand();
-        command.CommandText =
-            @"
-                INSERT INTO habits (habitcount)
-                VALUES ($habitcount)
-            ";
-        command.Parameters.AddWithValue("$habitcount", habitCount);
-
-        command.ExecuteNonQuery();
+            command.ExecuteNonQuery();
+        }
     }
 }

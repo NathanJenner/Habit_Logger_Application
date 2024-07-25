@@ -90,14 +90,30 @@ internal class DatabaseServices
 
             command.ExecuteNonQuery();
         }
+
     }
 
 
 
 
-    public void UpdateToDatabase(UserHabit habit)
+    public void UpdateToDatabase(int habitCount)
     {
         //need to add details here.
+
+        using var connection = new SqliteConnection("Data Source=habits.db");
+        connection.Open();
+
+        using var command = connection.CreateCommand();
+        command.CommandText =
+            @"
+                INSERT INTO habits (habitcount)
+                VALUES ($habitcount)
+            ";
+        command.Parameters.AddWithValue("$habitcount", habitCount);
+
+        command.ExecuteNonQuery();
+
+
     }
 
 }

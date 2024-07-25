@@ -88,6 +88,8 @@ void InsertRecord()
     userHabit.HabitCounter = 0;
 
     databaseServices.PostToDatabase(userHabit);
+    Console.WriteLine("\n\nYour habit has been recorded");
+    GetUserInput();
 }
 
 
@@ -101,20 +103,30 @@ void DeleteRecord()
     if (deleteConfirmation.ToUpper() == "Y")
     {
         databaseServices.DeleteFromDatabase();
+        Console.WriteLine("\n\n ---- Your habit has been deleted ---- ");
     }
     else
     {
         GetUserInput();
     }
-
-
-
-
-
 }
 
 //when user selects 4
 void UpdateRecord()
 {
     //if no record?
+    Console.WriteLine("What is your new Habit Count?");
+    string userHabitCountInput = Console.ReadLine();
+
+    if (int.TryParse(userHabitCountInput, out int result))
+    {
+        databaseServices.GetFromDatabase(result);
+    }
+    else
+    {
+        ViewRecord();
+    }
+
+
+
 }

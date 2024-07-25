@@ -120,11 +120,11 @@ void UpdateRecord()
 
     if (int.TryParse(userHabitCountInput, out int result))
     {
-        databaseServices.GetFromDatabase(result);
+        databaseServices.UpdateToDatabase(result);
     }
     else
     {
-        ViewRecord();
+        UpdateRecord();
     }
 
 

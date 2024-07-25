@@ -27,8 +27,6 @@ internal class DatabaseServices
     }
 
 
-
-
     public void PostToDatabase(UserHabit habit)
     {
         using var connection = new SqliteConnection("Data Source=habits.db");
@@ -45,7 +43,6 @@ internal class DatabaseServices
 
         command.ExecuteNonQuery();
     }
-
 
 
     public void GetFromDatabase(int habitId) // cut parameters: UserHabit habit
@@ -90,16 +87,11 @@ internal class DatabaseServices
 
             command.ExecuteNonQuery();
         }
-
     }
-
-
 
 
     public void UpdateToDatabase(int habitCount)
     {
-        //need to add details here.
-
         using var connection = new SqliteConnection("Data Source=habits.db");
         connection.Open();
 
@@ -112,8 +104,5 @@ internal class DatabaseServices
         command.Parameters.AddWithValue("$habitcount", habitCount);
 
         command.ExecuteNonQuery();
-
-
     }
-
 }

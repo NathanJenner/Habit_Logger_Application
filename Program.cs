@@ -1,11 +1,4 @@
-﻿//create database if doesn't already exist
-
-
-//Prompt user for input - options: insert, delete, update and view their logged habit.
-
-//
-//
-
+﻿
 using Habit_Logger_Application;
 
 UserHabit userHabit = new();
@@ -19,17 +12,16 @@ void GetUserInput()
 {
     Console.WriteLine("MAIN MENU\n\nWhat would you like to do?\n");
     Console.WriteLine(
-        "Type 0 to Close Application.\n" +
-        "Type 1 to View All Records.\n" +
-        "Type 2 to Insert Record.\n" +
-        "Type 3 to Delete Record.\n" +
-        "Type 4 to Update Record.\n" +
+        "Type 0 to Close the application.\n" +
+        "Type 1 to View your Habit.\n" +
+        "Type 2 to Create your Habit.\n" +
+        "Type 3 to Delete your Habit.\n" +
+        "Type 4 to Update your Habit.\n" +
         "------------------------------------------------\n\n"
         );
     userSelectionString = Console.ReadLine();
     ValidateUserInput(userSelectionString);
 }
-
 
 
 void ValidateUserInput(string userSelectionString)
@@ -44,22 +36,22 @@ void ValidateUserInput(string userSelectionString)
     {
         switch (userSelectionInt)
         {
-            case 0: Console.Clear(); break;
-            case 1: ViewRecord(); ; break;
+            case 0: Console.Clear(); Console.WriteLine("\n\n\n ---- Goodbye! ---- \n\n\n"); break;
+            case 1: ViewRecord(); break;
             case 2: InsertRecord(); break;
-            case 3: Console.WriteLine(); break;
-            case 4: Console.WriteLine(); break;
+            case 3: DeleteRecord(); break;
+            case 4: UpdateRecord(); break;
         }
     }
     else { GetUserInput(); }
 }
+
 
 //when user selects 1
 void ViewRecord()
 {
     Console.WriteLine("\n\nPlease enter the ID of your habit");
     string habitIdToReview = Console.ReadLine();
-
 
     if (int.TryParse(habitIdToReview, out int result))
     {
@@ -69,9 +61,8 @@ void ViewRecord()
     {
         ViewRecord();
     }
-
-    //if no record?
 }
+
 
 //when user selects 2
 void InsertRecord()
@@ -91,7 +82,6 @@ void InsertRecord()
     Console.WriteLine("\n\nYour habit has been recorded");
     GetUserInput();
 }
-
 
 
 //when user selects 3
@@ -114,7 +104,6 @@ void DeleteRecord()
 //when user selects 4
 void UpdateRecord()
 {
-    //if no record?
     Console.WriteLine("What is your new Habit Count?");
     string userHabitCountInput = Console.ReadLine();
 
@@ -128,7 +117,4 @@ void UpdateRecord()
     {
         UpdateRecord();
     }
-
-
-
 }

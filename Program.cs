@@ -50,17 +50,20 @@ void ValidateUserInput(string userSelectionString)
 //when user selects 1
 void ViewRecord()
 {
-    Console.WriteLine("\n\nPlease enter the ID of your habit");
-    string habitIdToReview = Console.ReadLine();
+    databaseServices.GetFromDatabase();
 
-    if (int.TryParse(habitIdToReview, out int result))
-    {
-        databaseServices.GetFromDatabase(result);
-    }
-    else
-    {
-        ViewRecord();
-    }
+
+    //Console.WriteLine("\n\nPlease enter the ID of your habit");
+    //string habitIdToReview = Console.ReadLine();
+
+    //if (int.TryParse(habitIdToReview, out int result))
+    //{
+    //    databaseServices.GetFromDatabase(result);
+    //}
+    //else
+    //{
+    //    ViewRecord();
+    //}
 }
 
 

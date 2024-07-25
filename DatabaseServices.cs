@@ -45,7 +45,7 @@ internal class DatabaseServices
     }
 
 
-    public void GetFromDatabase(int habitId) // cut parameters: UserHabit habit
+    public void GetFromDatabase()
     {
         using (var connection = new SqliteConnection("Data Source=habits.db"))
         {
@@ -54,22 +54,19 @@ internal class DatabaseServices
             using var command = connection.CreateCommand();
             command.CommandText =
                 @"
-                SELECT habitname, habitcount 
+                SELECT * 
                 FROM habits
-                WHERE id = $id
                 ";
-            command.Parameters.AddWithValue("$id", habitId);
 
             using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    var habitName = reader.GetString(0);
+                    var habitName = reader.GetString(2);
                     var habitCount = reader.GetString(1);
-                    Console.WriteLine($"For {habitName} your current Count is - {habitCount}");
+                    Console.WriteLine($"\n\nFor {habitName} your current Count is - {habitCount}");
                 }
 
-                //look to simplify this to just one entry. User wouldn't know the id.
             }
         }
     }

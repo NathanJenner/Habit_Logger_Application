@@ -121,6 +121,8 @@ void UpdateRecord()
     if (int.TryParse(userHabitCountInput, out int result))
     {
         databaseServices.UpdateToDatabase(result);
+        Console.WriteLine($"\n\nYour habit count has been updated to {result}");
+        GetUserInput();
     }
     else
     {
